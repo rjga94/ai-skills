@@ -4,7 +4,7 @@ description: Apply SOLID, testability, modularity and maintainability standards 
 argument-hint: "[project, language, or quality concern]"
 metadata:
   author: Ricardo Abreu
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Software Engineering Standards

@@ -15,6 +15,8 @@ Use this skill whenever working on a Kotlin Multiplatform (KMP) project. It is a
 
 Assume a shared UI across targets by default and use Compose Multiplatform. Use native platform UI only when the user requests it or the existing project is already built around it.
 
+Prefer the app's standard Compose UI components and apply the app's theme. Build custom components by composing and styling those base components rather than recreating their behavior from scratch.
+
 Use [Android's architecture recommendations](https://developer.android.com/topic/architecture) as a reference, together with Domain-Driven Design (DDD) and Model-View-ViewModel (MVVM). Apply these ideas across targets, adapting implementation details to the chosen UI framework.
 
 Use a dedicated ViewModel for each screen. Keep Compose views focused on rendering state and forwarding user actions; keep screen state and presentation logic in the ViewModel wherever practical. When multiple ViewModels need the same domain behavior, consider extracting it into a Use Case in the domain layer.
@@ -33,6 +35,7 @@ For backend services, use Ktor by default unless the project or user chooses oth
 ## Review checklist
 
 - Is shared Compose Multiplatform UI used by default, unless the project or user prefers native UI?
+- Are standard Compose components themed for the app, with custom components built on top of them where practical?
 - Does each screen have a dedicated ViewModel, with Compose views primarily rendering state and forwarding actions?
 - Is behavior shared across ViewModels extracted into domain Use Cases where appropriate?
 - Are repository contracts clear and injectable, with data sources kept behind repository implementations?

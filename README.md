@@ -6,6 +6,7 @@ This repository contains reusable skills for AI coding agents. Each skill is kep
 
 | Skill | Description |
 | --- | --- |
+| [kotlin-multiplatform](kotlin-multiplatform/SKILL.md) | Shared-UI-first architecture guidance and suggested libraries for Kotlin Multiplatform projects. |
 | [software-engineering-standards](software-engineering-standards/SKILL.md) | Apply software engineering standards when implementing, refactoring, testing, or reviewing code. |
 
 ## Use a skill

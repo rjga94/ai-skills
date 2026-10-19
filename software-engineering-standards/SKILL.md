@@ -4,43 +4,33 @@ description: Apply SOLID, testability, modularity and maintainability standards 
 argument-hint: "[project, language, or quality concern]"
 metadata:
   author: Ricardo Abreu
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Software Engineering Standards
 
 Use this skill whenever editing code, creating or modifying a coding or software related
 project. Apply the guidance proportionately to the
-project, even when the user does not explicitly mention standards.
+project. Follow the guidance in this skill carefully and thoroughly.
 
-## Continuous Evaluation and Refactoring
+Continusly evaluate every code change against this skill's standards and match them as closely as possible at all times, that means continuous refactoring of the code directly and indirectly related to what's being changed, including architecture, structure and general project organization.
 
-Whenever this skill is triggered, continuously evaluate the requested change
-against the standards below and inspect both directly and indirectly related
-files. This includes affected dependency chains, consumers, interfaces, tests,
-build configuration, generated templates, documentation, and module or runtime
-boundaries. Do not limit the evaluation to the files named in the request.
+## SOLID Principles
 
-Refactor qualifying issues as part of the current task. Make one bounded pass
-across the affected dependency neighborhood: always fix standards violations
-that affect correctness, compilation, tests, or consistency; usually fix
-related consumers, tests, build files, generated templates, and documentation;
-and fix nearby design issues when the behavior is understood and protected by
-appropriate verification. Keep the work tied to the requested change and its
-impact surface.
+*SOLID* is an acronym for the first five object-oriented design. These principles establish practices for developing software with considerations for maintaining and extending it as the project grows. Adopting these practiceshelp avoid code smells, refactor code, and develop Agile or Adaptive software.
 
-Breaking API, ABI, schema, persistence, module-boundary, or externally
-observable behavior changes are allowed when they materially improve design,
-scalability, testability, maintainability, or future-proofing. Ask the user for
-approval before applying any such breaking change. Do not introduce speculative
-abstractions, unrelated rewrites, or hypothetical compatibility layers.
+- **Single Responsibility:** Give each module or type one cohesive responsibility
+  and one primary reason to change.
+- **Open/Closed:** Make behavior extendable without repeatedly modifying stable
+  code, using abstractions where they provide a real benefit.
+- **Liskov Substitution:** Ensure an implementation can stand in for its
+  abstraction without breaking the expectations of its consumers.
+- **Interface Segregation:** Keep interfaces focused so consumers do not depend
+  on operations they do not use.
+- **Dependency Inversion:** Make high-level policy depend on abstractions rather
+  than low-level implementation details; let details implement those abstractions.
 
-When the user refers to "standards" in a project involving code, interpret it
-as a request to practice sound software engineering across the relevant scope.
-Treat the following as the baseline, not as an exhaustive checklist:
-
-- **SOLID principles:** Keep responsibilities focused, dependencies replaceable, and
-  abstractions justified by real variation or ownership boundaries.
+## Clean code key points
 - **Testability:** Design seams for focused unit tests and verify important
   user or system behavior with end-to-end tests. Keep tests deterministic,
   meaningful, and maintainable.
@@ -75,42 +65,19 @@ Treat the following as the baseline, not as an exhaustive checklist:
   technical behavior only, but refactor complexity caused by poor design before
   documenting it with comments.
 
-## Adaptive Practice
-
-The baseline concepts do not limit the practices that may be recommended or
-applied. When the prompt or project context calls for it, also consider
-separation of concerns, dependency management, appropriate design patterns,
-API design, documentation, observability, security, accessibility, performance,
-resilience, and maintainability.
-
-Introduce an additional practice when it has a concrete benefit for
-organization, maintainability, testability, reliability, security, or user
-outcomes. Apply it proportionately to the project; avoid cargo-cult rules,
-unnecessary abstractions, and process that does not improve the result.
-
 ## Review Checklist
 
-- Are responsibilities cohesive and dependencies appropriately directed?
-- Is the design testable without excessive mocking or infrastructure setup?
-- Does the test suite cover behavior at unit and end-to-end boundaries where
-  appropriate, and does it remain deterministic and maintainable?
-- Is repeated knowledge centralized without creating a premature abstraction?
-- Are modules, projects, and folders organized around clear responsibilities?
+Ask yourself these questions to help guide you towards Clean Code and architecture and as a check that the skill had the desired effect on the changed software. If the answer to these is not a Yes then review and try to improve, if you can't reach the Yes on your own ask the user about it.
+
+- Are the SOLID principles applied as closely as possible?
+- Are you able to test the changed software entirelly locally using unit tests?
+- Are you able to test the changed software entirelly locally by manually using the software yourself?
+    - If Yes, can the manual test be turned into an automated test?
+- Is the changed software fully absent of duplicated code?
 - Have both direct and indirect consumers, dependencies, boundaries, build
   files, generated templates, and documentation been evaluated?
-- Will the design scale with plausible growth in data, users, modules,
-  integrations, platforms, or contributors?
-- Are coupling, bottlenecks, rigid assumptions, and migration risks addressed or
-  explicitly reported as deferred findings?
+- Is the changed software contributing positively to scalability?
 - Do names reveal intent, distinguish related concepts meaningfully, and avoid
   misleading or disinformative terminology?
-- Are objects focused on one responsibility, with small operations written at
-  one level of abstraction?
-- Are files kept small and single-purpose, with any oversized files justified by
-  a concrete reason rather than accumulated cruft?
 - Does the code explain itself, with comments reserved for unavoidable complexity
   rather than compensating for code that needs refactoring?
-- Would another relevant engineering practice materially improve this change?
-- Are the chosen practices proportionate to the project's size and context?
-- Were all deferred standards findings reported with their impact, rationale,
-  and recommended follow-up?

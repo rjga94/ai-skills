@@ -30,6 +30,16 @@ For backend services, use Ktor by default unless the project or user chooses oth
 - Services depend on repository interfaces. Repository implementations coordinate data sources for databases and external services.
 - Inject these dependencies so services and routes can be tested without live databases or network services.
 
+## Review checklist
+
+- Is shared Compose Multiplatform UI used by default, unless the project or user prefers native UI?
+- Does each screen have a dedicated ViewModel, with Compose views primarily rendering state and forwarding actions?
+- Is behavior shared across ViewModels extracted into domain Use Cases where appropriate?
+- Are repository contracts clear and injectable, with data sources kept behind repository implementations?
+- For backend code, do Ktor routes handle transport and DTO mapping while services contain application operations?
+- Are domain, ViewModel, service, and route behaviors testable without depending on live databases or network services?
+- Do suggested libraries fit the project's targets and existing choices?
+
 ## Suggested libraries
 
 These are optional starting points, not required dependencies. Choose alternatives when they better fit the project or its targets.

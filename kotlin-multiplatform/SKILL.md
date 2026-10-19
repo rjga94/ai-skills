@@ -19,7 +19,7 @@ Use [Android's architecture recommendations](https://developer.android.com/topic
 
 Use a dedicated ViewModel for each screen. Keep Compose views focused on rendering state and forwarding user actions; keep screen state and presentation logic in the ViewModel wherever practical. When multiple ViewModels need the same domain behavior, consider extracting it into a Use Case in the domain layer.
 
-Structure the data layer around repositories and data sources. Repositories provide the domain-facing data contract and coordinate data sources, which handle the underlying APIs, databases, or other storage. Adapt these patterns to the project's needs rather than treating them as mandatory.
+Structure the data layer around repositories and data sources with clear interfaces. Expose repository contracts to the domain layer, keep concrete implementations behind those contracts, and have repositories coordinate data sources for APIs, databases, or other storage. Inject these dependencies so domain logic and ViewModels can be tested with fakes instead of relying on live services or storage.
 
 ## Suggested libraries
 

@@ -21,6 +21,8 @@ Use [Android's architecture recommendations](https://developer.android.com/topic
 
 Use a dedicated ViewModel for each screen. Keep Compose views focused on rendering state and forwarding user actions; keep screen state and presentation logic in the ViewModel wherever practical. When multiple ViewModels need the same domain behavior, consider extracting it into a Use Case in the domain layer.
 
+Most UI components should be simple enough to be stateless, but a sufficiently complex component can have its own ViewModel.
+
 Structure the data layer around repositories and data sources with clear interfaces. Expose repository contracts to the domain layer, keep concrete implementations behind those contracts, and have repositories coordinate data sources for APIs, databases, or other storage. Inject these dependencies so domain logic and ViewModels can be tested with fakes instead of relying on live services or storage.
 
 ## Backend architecture
@@ -34,14 +36,12 @@ For backend services, use Ktor by default unless the project or user chooses oth
 
 ## Review checklist
 
-- Is shared Compose Multiplatform UI used by default, unless the project or user prefers native UI?
 - Are standard Compose components themed for the app, with custom components built on top of them where practical?
 - Does each screen have a dedicated ViewModel, with Compose views primarily rendering state and forwarding actions?
 - Is behavior shared across ViewModels extracted into domain Use Cases where appropriate?
 - Are repository contracts clear and injectable, with data sources kept behind repository implementations?
 - For backend code, do Ktor routes handle transport and DTO mapping while services contain application operations?
 - Are domain, ViewModel, service, and route behaviors testable without depending on live databases or network services?
-- Do suggested libraries fit the project's targets and existing choices?
 
 ## Suggested libraries
 

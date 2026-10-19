@@ -1,13 +1,13 @@
 ---
-name: kotlin-multiplatform
-description: Use whenever implementing, refactoring, testing, or reviewing a Kotlin Multiplatform project. Provides frontend architecture guidance and suggested libraries.
+name: kotlin-multiplatform-guidance
+description: Use whenever implementing, refactoring, testing, or reviewing a Kotlin Multiplatform project. Provides frontend and backend architecture guidance and suggested libraries.
 argument-hint: "[feature or library choice]"
 metadata:
   author: Ricardo Abreu
   version: "1.0.0"
 ---
 
-# Kotlin Multiplatform
+# Kotlin Multiplatform Guidance
 
 Use this skill whenever working on a Kotlin Multiplatform (KMP) project. It is a guide and template, not a set of requirements; follow the project's existing choices and the user's direction when they differ.
 
@@ -21,6 +21,15 @@ Use a dedicated ViewModel for each screen. Keep Compose views focused on renderi
 
 Structure the data layer around repositories and data sources with clear interfaces. Expose repository contracts to the domain layer, keep concrete implementations behind those contracts, and have repositories coordinate data sources for APIs, databases, or other storage. Inject these dependencies so domain logic and ViewModels can be tested with fakes instead of relying on live services or storage.
 
+## Backend architecture
+
+For backend services, use Ktor by default unless the project or user chooses otherwise. Organize the server using layered architecture, commonly called Controller–Service–Repository:
+
+- Ktor routes and handlers form the HTTP controller/transport layer. Map requests and responses through DTOs at this boundary; keep transport DTOs out of the domain layer.
+- Services coordinate application operations and domain behavior rather than placing it directly in route handlers.
+- Services depend on repository interfaces. Repository implementations coordinate data sources for databases and external services.
+- Inject these dependencies so services and routes can be tested without live databases or network services.
+
 ## Suggested libraries
 
 These are optional starting points, not required dependencies. Choose alternatives when they better fit the project or its targets.
@@ -28,7 +37,7 @@ These are optional starting points, not required dependencies. Choose alternativ
 | Concern | Suggested library |
 | --- | --- |
 | Dependency injection | Koin |
-| Networking | Ktor |
+| Networking and backend services | Ktor |
 | Persistence | Room when it supports the required targets; consider SQLDelight as an alternative |
 | Asynchronous and reactive code | kotlinx.coroutines and Flow |
 | Serialization | kotlinx.serialization |

@@ -6,7 +6,7 @@ This repository contains reusable skills for AI coding agents. Each skill is kep
 
 | Skill | Description |
 | --- | --- |
-| [frontend-architecture-guidance](frontend-architecture-guidance/SKILL.md) | Platform-neutral frontend architecture concepts, with Kotlin Multiplatform guidance in a companion file. |
+| [frontend-architecture-guidance](frontend-architecture-guidance/SKILL.md) | Platform-neutral frontend architecture concepts, with project-specific companion guidance; use only the companion matching the project type. |
 | [software-engineering-standards](software-engineering-standards/SKILL.md) | Apply software engineering standards when implementing, refactoring, testing, or reviewing code. |
 
 ## Use a skill

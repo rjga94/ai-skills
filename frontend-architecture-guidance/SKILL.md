@@ -1,6 +1,6 @@
 ---
 name: frontend-architecture-guidance
-description: Use when designing, implementing, refactoring, testing, or reviewing frontend architecture across platforms. Provides platform-neutral architecture guidance and platform-specific companion guidance.
+description: Use when designing, implementing, refactoring, testing, or reviewing frontend architecture across platforms. Provides platform-neutral guidance and directs you to the companion for the project's platform.
 argument-hint: "[feature or library choice]"
 metadata:
   author: Ricardo Abreu
@@ -11,7 +11,10 @@ metadata:
 
 Use this skill when designing, implementing, refactoring, testing, or reviewing frontend architecture. It is a guide, not a set of requirements; follow the project's existing choices and the user's direction when they differ.
 
-For platform-specific guidance, apply the relevant companion alongside these concepts. For Kotlin Multiplatform projects, see [Kotlin Multiplatform guidance](kotlin-multiplatform.md).
+Apply the platform-neutral concepts above, then use only the companion that matches the project's type. Do not apply platform-specific guidance for other project types.
+
+- Kotlin Multiplatform projects: [Kotlin Multiplatform guidance](kotlin-multiplatform-guidance.md)
+- Apple platform projects using Xcode and SwiftUI: [Apple platform guidance](apple-platform-guidance.md)
 
 ## Architecture concepts
 

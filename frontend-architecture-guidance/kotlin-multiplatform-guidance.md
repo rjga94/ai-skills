@@ -1,6 +1,6 @@
 # Kotlin Multiplatform Guidance
 
-Apply the platform-neutral concepts in [Frontend Architecture Guidance](SKILL.md) to Kotlin Multiplatform (KMP), adapting implementation details to the project's targets and existing choices. This is guidance, not a set of requirements.
+Apply the platform-neutral frontend architecture concepts in [Frontend Architecture Guidance](SKILL.md) to Kotlin Multiplatform (KMP), adapting implementation details to the project's targets and existing choices. This is guidance, not a set of requirements.
 
 ## UI and presentation
 

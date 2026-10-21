@@ -37,11 +37,23 @@ Keep a component in its screen directory, in its own file, when only that screen
 
 Components should usually be stateless, with the screen's ViewModel owning their state. A sufficiently complex component may have its own ViewModel when its behavior warrants an independent state boundary.
 
+At the same application or module boundary, keep `Domain` and `Data` beside `Presentation`:
+
+- `Domain/Model`: domain entities and value types that represent the concepts and rules of the application.
+- `Domain/Repository`: repository contracts consumed by domain operations.
+- `Domain/UseCase`: meaningful application or domain operations. Add a use case when it provides a useful boundary; avoid creating one for every trivial method.
+- `Data/Repository`: concrete repository implementations that fulfill the domain contracts and coordinate data sources.
+- `Data/DataSource`: integrations for external systems, grouped by kind such as `Remote` and `Local`.
+- `Data/Mapper`: conversions between domain models and transport or persistence models when those representations differ.
+
+Keep domain rules and contracts independent of data-source and UI details. Data implementations may depend on domain contracts, but the Domain layer should not depend on Data or Presentation. Keep transport and persistence models at the data boundary rather than exposing them to screens or domain operations.
+
 ## Review checklist
 
 - Is UI code primarily responsible for rendering state and forwarding actions?
 - Are domain rules independent of UI and platform details?
 - Are repositories and data sources separated where a meaningful boundary is needed?
+- Do repository implementations and transport or persistence models stay in Data, with contracts and domain operations in Domain?
 - Can important behaviors be tested without live services or storage?
 - Are abstractions and state ownership appropriate to the complexity they serve?
 - Are screens, screen-specific components, shared components, and theme tokens organized in the appropriate directories?

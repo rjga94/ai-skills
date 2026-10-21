@@ -25,6 +25,18 @@ Inject dependencies where it helps isolate behavior and test it with fakes inste
 
 Prefer components that receive the state they need and report user actions. Keep local interaction state close to a component when it does not need to be shared.
 
+## Project structure
+
+Keep frontend UI code under a `Presentation` directory. Place the main UI entry-point file directly in `Presentation`, alongside these subdirectories:
+
+- `Screen`: one directory per screen. Each screen directory contains its UI, ViewModel, state models, and any screen-specific components. Build the screen UI from focused components.
+- `Theme`: design-system tokens, with a separate file for each category, such as `Typography`, `Colors`, and `Dimens`.
+- `Component`: components intended for reuse across screens.
+
+Keep a component in its screen directory, in its own file, when only that screen needs it. Whenever creating or changing a component, check the other screens for a genuine reuse opportunity; move it to `Component` when it serves multiple screens rather than promoting it speculatively.
+
+Components should usually be stateless, with the screen's ViewModel owning their state. A sufficiently complex component may have its own ViewModel when its behavior warrants an independent state boundary.
+
 ## Review checklist
 
 - Is UI code primarily responsible for rendering state and forwarding actions?
@@ -32,3 +44,4 @@ Prefer components that receive the state they need and report user actions. Keep
 - Are repositories and data sources separated where a meaningful boundary is needed?
 - Can important behaviors be tested without live services or storage?
 - Are abstractions and state ownership appropriate to the complexity they serve?
+- Are screens, screen-specific components, shared components, and theme tokens organized in the appropriate directories?

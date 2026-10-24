@@ -23,3 +23,7 @@ Copy the whole directory rather than only `SKILL.md` so any supporting files inc
 - Update the **Available skills** table whenever a skill is added, removed, renamed, or its purpose changes.
 
 This repository does not currently define build, test, or lint commands.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

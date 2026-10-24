@@ -4,7 +4,7 @@ description: Apply software engineering and architecture guidance when designing
 argument-hint: "[project, architecture, or quality concern]"
 metadata:
   author: Ricardo Abreu
-  version: "1.5.2"
+  version: "1.5.3"
 ---
 
 # Software Engineering Standards
@@ -72,6 +72,7 @@ At the same application or module boundary, project structure is organized in th
 Data should be kept and maitained in an Offline first caching fashion and ready for reactive UI.
 
 - Data/DataSource: Integrations for external systems, organized by data type and source type such as Remote and Local.
+  File names are suffixed with 'LocalDataSource' or 'RemoteDataSource' appropriately.
 - Data/Repository: Concrete repository implementations that fulfill the domain contracts and coordinate data sources.
 - Data/Mapper: Conversions between domain models and transport or persistence models when those representations differ.
 

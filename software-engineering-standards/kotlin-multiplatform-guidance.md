@@ -2,7 +2,15 @@
 
 Apply the guidance in [Software Engineering Standards](SKILL.md) together with the guidance in this file to Kotlin Multiplatform (KMP).
 
-## UI
+## Working with Room
+
+**This guidance is specific for Room database libraries, if the project in context does not use Room, ignore this guidance**
+
+Keep room specific code organized inside a 'room' folder directly inside the Data folder
+
+Entity and Dao of the same type should be kept in the same file.
+
+## Presentation layer
 
 Assume Compose shared UI across platform targets.
 

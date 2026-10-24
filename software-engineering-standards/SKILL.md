@@ -12,72 +12,52 @@ metadata:
 Use this skill whenever editing code, creating or modifying a coding or software related
 project. Follow the guidance in this skill carefully and thoroughly, only differ when explicitly told.
 
-
 **MUST COMPLY**
+
 You are required on every code change, even small changes, to apply this skill everywhere in the project in context, anything that helps improve SOLID Principles and Clean code key points is worth doing, even if that means a big refactor for a small gain. Given these conditions, if a code change means a big refactor, ask the user for confirmation.
 
 ## SOLID Principles
 
 *SOLID* is an acronym for the five principles of object-oriented design. These principles establish practices for developing and maintaining software as it grows. Adopting them helps avoid code smells, supports refactoring, and enables adaptive development.
 
-- **Single Responsibility:** Give each module or type one cohesive responsibility
-  and one primary reason to change.
-- **Open/Closed:** Make behavior extendable without repeatedly modifying stable
-  code, using abstractions where they provide a real benefit.
-- **Liskov Substitution:** Ensure an implementation can stand in for its
-  abstraction without breaking the expectations of its consumers.
-- **Interface Segregation:** Keep interfaces focused so consumers do not depend
-  on operations they do not use.
-- **Dependency Inversion:** Make high-level policy depend on abstractions rather
-  than low-level implementation details; let details implement those abstractions.
+- **Single Responsibility:** Give each module or type one cohesive responsibility and one primary reason to change.
+- **Open/Closed:** Make behavior extendable without repeatedly modifying stable code, using abstractions where they provide a real benefit.
+- **Liskov Substitution:** Ensure an implementation can stand in for its abstraction without breaking the expectations of its consumers.
+- **Interface Segregation:** Keep interfaces focused so consumers do not depend on operations they do not use.
+- **Dependency Inversion:** Make high-level policy depend on abstractions rather than low-level implementation details; let details implement those abstractions.
 
 ## Clean code key points
-- **Testability:** Design seams for focused unit tests and verify important
-  user or system behavior with end-to-end tests. Keep tests deterministic,
-  meaningful, and maintainable.
-- **Duplication reduction:** Identify repeated logic, knowledge, and
-  configuration. Reuse only when the duplicated behavior has a coherent
-  abstraction; do not force unrelated code together merely to remove similar
-  lines.
-- **Modularity:** Organize responsibilities into cohesive modules at both the
-  project level and within individual projects. Keep dependencies explicit and
-  boundaries useful.
-- **Project structure:** Use a predictable folder and source layout that
-  reflects ownership, build boundaries, runtime layers, and test placement.
-- **Scalability and future-proofing:** Evaluate whether the design remains
-  maintainable at scale while avoid speculative abstractions and premature optimization.
-- **Naming:** Give functions, classes, variables, modules, and other objects
-  intention-revealing names. Names should communicate purpose and behavior,
-  make meaningful distinctions between related concepts, and avoid disinformation
-  such as misleading types, stale terminology, ambiguous abbreviations, or names
-  that imply guarantees the object does not provide.
-- **Object design:** Keep objects, including classes, structs, modules, and
-  similar abstractions, focused on one responsibility. Keep their operations
-  small and focused on one thing, with each operation at one level of abstraction
-  rather than mixing high-level coordination with low-level implementation details.
-- **File size:** Keep files small and single-purpose. A file that has grown
-  large enough to require scrolling through many responsibilities is a signal
-  to split it — extract cohesive modules or functions rather than accumulating
-  unrelated code. Apply proportionately: framework glue, generated code, and
-  large data tables may justify longer files, but flag those exceptions
-  explicitly instead of silently accepting bloat.
-- **Comments:** Prefer code that explains itself through clear structure and
-  naming. Add concise comments when they explain inherently complex domain or
-  technical behavior only, but refactor complexity caused by poor design before
-  documenting it with comments.
+
+- **Testability:** Design seams for focused unit tests and verify important user or system behavior with end-to-end tests. Keep tests deterministic, meaningful, and maintainable.
+- **Duplication reduction:** The code base should be kept as small as possible, you should identify repeated code or behaviour and refactor accordingly.
+- **Modularity:** Organize responsibilities into cohesive modules. Keep dependencies explicit and boundaries useful.
+- **Scalability:** The project should remain scalable, that means continuous refactoring on every change and close attention to SOLID principles.
+- **Naming:** Give functions, classes, variables, modules, and other objects intention-revealing names. Names should communicate purpose and behavior, make meaningful distinctions between related concepts, and avoid disinformation such as misleading types, stale terminology, ambiguous abbreviations, or names that imply guarantees the object does not provide.
+- **Object design:** Keep objects, including classes, structs, modules, and similar abstractions, focused on one responsibility. Keep their operations small and focused on one thing, with each operation at one level of abstraction rather than mixing high-level coordination with low-level implementation details.
+- **File size:** Keep files small and single-purpose, prefer one object per file unless objects relate directly only to each other. A file that has grown large enough to require scrolling through many responsibilities is a signal to split it — extract cohesive modules or functions rather than accumulating unrelated code.
+- **Comments:** Prefer code that explains itself through clear structure and naming. Add concise comments when they explain inherently complex domain or technical behavior only, attempt first to refactor complexity caused by poor design before documenting it with comments.
 
 ## Frontend Architecture
 
 Use Domain-Driven Design (DDD) to model domain concepts and business rules independently of UI and infrastructure. Use Model-View-ViewModel (MVVM) for the presentation layerl, views render state and forward actions, while a presentation model—often a ViewModel—coordinates screen state and presentation behavior.
+
 Keep domain rules out of presentation models. Extract domain operations into use cases when they are shared across screens or when a distinct application operation benefits from a clear boundary.
+
 Organize data access around repositories and data sources with clear responsibilities. Use repository contracts to keep domain behavior independent from concrete APIs, databases, or other storage when that boundary is useful.
+
 Inject dependencies where doing so helps isolate behavior and test it with fakes instead of relying on live services or storage. Keep simple dependencies and components free of unnecessary abstraction.
+
 Prefer components that receive the state they need and report user actions. Keep local interaction state close to a component when it does not need to be shared.
-Prefer one file for each object, named the same as the object itself
+
+Prefer one file for each object, named the same as the object itself.
+
 
 **MUST COMPLY**
+
 Below is a list of project type specific guidance files.
+
 You should detect the project type and check if any of the project specific guidance fits for the project in context, use the project specific guidance together with the generic guidance in this file.
+
 Only use the project specific guidance file that fits, ignore all others, if a project specific guidance is not available for the project in context, ignore all of them.
 
 - [Kotlin Multiplatform guidance](kotlin-multiplatform-guidance.md)
@@ -103,6 +83,7 @@ Keep domain rules and contracts independent of data-source and UI details. Data 
 **This guidance is specific for Declarative UI, you can still use this for software that doesn't use Declarative UI but know that some things will not fit properly.**
 
 The Presentation layer is organized in an MVVM fashion.
+
 Keep all UI code under a Presentation folder. Place the main UI entry-point file directly in Presentation, alongside these sub-folders:
 
 - Screen
@@ -112,6 +93,7 @@ Keep all UI code under a Presentation folder. Place the main UI entry-point file
 ##### Screen sub-folder
 
 A Screen is a UI navigation destination, usually taking the whole screen.
+
 Each screen has it's own folder named appropriately for what the screen is (placed inside the Screen sub-folder), the screen specific folder usually contains three files:
 
 - Declarative UI file
@@ -119,17 +101,23 @@ Each screen has it's own folder named appropriately for what the screen is (plac
 - State file
 
 Declarative UI file: Has the sole responsibility of containing UI building blocks of the screen, in declarative UI a screen is a single object, agnostic of domain state and and business logic. The object is named the same as it's screen folder with the "Screen" suffix.
+
 ViewModel file: An object which has the responsibility maintaining the screen's state and logic. The object is named the same as it's screen folder with the "ViewModel" suffix.
+
 State file: A model object, the simplest of the three, declares the model of the state that will be maintained by the view model and used by the screen UI. The object is named the same as it's screen folder with the "State" suffix.
 
 ##### Component sub-folder
 
 A Component is a piece/portion of UI, meant to reduce duplication and isolation of UI code in screens and other components that need to use the same UI repeatedly.
+
 Each component has it's own folder named appropriately for what the component is (placed inside the Component sub-folder).
 
 **MUST COMPLY**
+
 Do not build look alike components.
+
 Always consider adapting a component first before creating a new one.
+
 Whenever a component changes, you MUST check all it's implementors to make sure none of them broke visually or logically.
 
 There are two types of components:
@@ -145,7 +133,8 @@ The theme contains everything that is design system specific, such as Typography
 
 ## Review Checklist
 
-Use this checklist to review the changed software. Apply the frontend-specific questions when working on frontend architecture. If an answer is no, improve the design where appropriate or ask the user when the right choice is unclear.
+Use this checklist to review the changed software. Apply the frontend-specific questions when working on frontend architecture.
+If an answer is no, improve the design where appropriate or ask the user when the right choice is unclear.
 
 - Are the SOLID principles applied as closely as possible?
 - Are domain rules independent of UI and platform details, and is UI code primarily responsible for rendering state and forwarding actions?

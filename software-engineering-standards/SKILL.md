@@ -67,22 +67,29 @@ Only use the project specific guidance file that fits, ignore all others, if a p
 
 At the same application or module boundary, project structure is organized in three main folders `Data`, `Domain` and `Presentation`.
 
-#### Data and Domain layers
+#### Data
 
-- `Data/Repository`: concrete repository implementations that fulfill the domain contracts and coordinate data sources.
-- `Data/DataSource`: integrations for external systems, grouped by kind such as `Remote` and `Local`.
-- `Data/Mapper`: conversions between domain models and transport or persistence models when those representations differ.
-- `Domain/Model`: domain entities and value types that represent the concepts and rules of the application.
-- `Domain/Repository`: repository contracts consumed by domain operations.
-- `Domain/UseCase`: meaningful application or domain operations. Add a use case when it provides a useful boundary; avoid creating one for every trivial method.
+Data should be kept and maitained in an Offline first caching fashion and ready for reactive UI.
 
-Keep domain rules and contracts independent of data-source and UI details. Data implementations may depend on domain contracts, but the Domain layer should not depend on Data or Presentation. Keep transport and persistence models at the data boundary rather than exposing them to screens or domain operations.
+- Data/DataSource: Integrations for external systems, organized by data type and source type such as Remote and Local.
+- Data/Repository: Concrete repository implementations that fulfill the domain contracts and coordinate data sources.
+- Data/Mapper: Conversions between domain models and transport or persistence models when those representations differ.
+
+#### Domain layer
+
+- Domain/Model: Domain entities and value types that represent the concepts and rules of the application.
+- Domain/Repository: Contracts only in domain layer, organized per data type, each handles domain operations of that data type.
+- Domain/UseCase: Add a use case when more than one view model needs to perform the same domain operation.
 
 #### Presentation layer (declarative UI)
 
 **This guidance is specific for Declarative UI, you can still use this for software that doesn't use Declarative UI but know that some things will not fit properly.**
 
-The Presentation layer is organized in an MVVM fashion.
+The Presentation layer is organized in an MVVM fashion. 
+
+UI should be reactive to data changes, use skeleton loading style to have a faster feeling UI, segment and parallelize data loading per component whenever possible.
+
+Use blocking loading dialogs only for data changes triggered by user interactions (example: a save button).
 
 Keep all UI code under a Presentation folder. Place the main UI entry-point file directly in Presentation, alongside these sub-folders:
 
@@ -102,15 +109,14 @@ Each screen has it's own folder named appropriately for what the screen is (plac
 
 Declarative UI file: Has the sole responsibility of containing UI building blocks of the screen, in declarative UI a screen is a single object, agnostic of domain state and and business logic. The object is named the same as it's screen folder with the "Screen" suffix.
 
-ViewModel file: An object which has the responsibility maintaining the screen's state and logic. The object is named the same as it's screen folder with the "ViewModel" suffix.
+ViewModel file: An object which has the responsibility maintaining the screen's state and logic, it's also the link between UI and Domain layer, can use repositories and use cases directly.
+The object is named the same as it's screen folder with the "ViewModel" suffix.
 
 State file: A model object, the simplest of the three, declares the model of the state that will be maintained by the view model and used by the screen UI. The object is named the same as it's screen folder with the "State" suffix.
 
 ##### Component sub-folder
 
 A Component is a piece/portion of UI, meant to reduce duplication and isolation of UI code in screens and other components that need to use the same UI repeatedly.
-
-Each component has it's own folder named appropriately for what the component is (placed inside the Component sub-folder).
 
 **MUST COMPLY**
 

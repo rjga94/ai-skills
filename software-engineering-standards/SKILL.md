@@ -4,7 +4,7 @@ description: Apply software engineering and architecture guidance when designing
 argument-hint: "[project, architecture, or quality concern]"
 metadata:
   author: Ricardo Abreu
-  version: "1.5.1"
+  version: "1.5.2"
 ---
 
 # Software Engineering Standards
@@ -34,7 +34,7 @@ You are required on every code change, even small changes, to apply this skill e
 - **Scalability:** The project should remain scalable, that means continuous refactoring on every change and close attention to SOLID principles.
 - **Naming:** Give functions, classes, variables, modules, and other objects intention-revealing names. Names should communicate purpose and behavior, make meaningful distinctions between related concepts, and avoid disinformation such as misleading types, stale terminology, ambiguous abbreviations, or names that imply guarantees the object does not provide.
 - **Object design:** Keep objects, including classes, structs, modules, and similar abstractions, focused on one responsibility. Keep their operations small and focused on one thing, with each operation at one level of abstraction rather than mixing high-level coordination with low-level implementation details.
-- **File size:** Keep files small and single-purpose, prefer one object per file unless objects relate directly only to each other. A file that has grown large enough to require scrolling through many responsibilities is a signal to split it — extract cohesive modules or functions rather than accumulating unrelated code.
+- **Files:** Keep files small and single-purpose, prefer one object per file unless objects relate directly only to each other. A file that has grown large enough to require scrolling through many responsibilities is a signal to split it — extract cohesive modules or functions rather than accumulating unrelated code.
 - **Comments:** Prefer code that explains itself through clear structure and naming. Add concise comments when they explain inherently complex domain or technical behavior only, attempt first to refactor complexity caused by poor design before documenting it with comments.
 
 ## Frontend Architecture

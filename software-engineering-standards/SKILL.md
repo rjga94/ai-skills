@@ -133,24 +133,16 @@ The theme contains everything that is design system specific, such as Typography
 
 ## Review Checklist
 
-Use this checklist to review the changed software. Apply the frontend-specific questions when working on frontend architecture.
-If an answer is no, improve the design where appropriate or ask the user when the right choice is unclear.
+**MUST COMPLY**
 
-- Are the SOLID principles applied as closely as possible?
-- Are domain rules independent of UI and platform details, and is UI code primarily responsible for rendering state and forwarding actions?
-- Are repositories and data sources separated where a meaningful boundary is needed?
-- Do repository implementations and transport or persistence models stay in Data, with contracts and domain operations in Domain?
-- Can you test the changed software locally with unit tests?
-- Can you test the changed software manually?
-    - If Yes, can the manual test be turned into an automated test?
-- Can important frontend behaviors be tested without live services or storage?
-- Is the changed software fully absent of duplicated code?
-- Have both direct and indirect consumers, dependencies, boundaries, build
-  files, generated templates, and documentation been evaluated?
-- Is the changed software contributing positively to scalability?
-- Are abstractions and state ownership appropriate to the complexity they serve?
-- Are screens, screen-specific components, shared components, and theme tokens organized in the appropriate directories?
-- Do names reveal intent, distinguish related concepts meaningfully, and avoid
-  misleading or disinformative terminology?
-- Does the code explain itself, with comments reserved for unavoidable complexity
-  rather than compensating for code that needs refactoring?
+These are YES/NO questions to be applyed on the changed software,
+if the answer is NO to any of them, review and refactor accordingly.
+
+- Are the SOLID principles in compliance?
+- Is Domain Driven Design in compliance?
+- Does the the Presentation layer comply to Model View View Model pattern?
+- Is the software kept scalable and modular, with clear bounderies throughout?
+- Are unit tests covering the changed software appropriately?
+- Is the changed software fully absent of duplicated code, logic or behaviour?
+- While working on this change, have you considered all direct and indirect related code,
+  consumers, dependencies, boundaries and documentation?

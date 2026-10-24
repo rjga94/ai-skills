@@ -4,7 +4,7 @@ description: Apply software engineering and architecture guidance when designing
 argument-hint: "[project, architecture, or quality concern]"
 metadata:
   author: Ricardo Abreu
-  version: "1.5.3"
+  version: "1.5.4"
 ---
 
 # Software Engineering Standards

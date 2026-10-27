@@ -21,6 +21,19 @@ Keep Compose views focused on rendering its state and forwarding user actions.
 
 Keep screen state and presentation behavior in the ViewModel.
 
+For each screen, keep its Compose screen, ViewModel, and state type together in the screen-specific folder under `Presentation/Screen`. Do not place the ViewModel or state file alongside that folder under `Screen`. For example:
+
+```text
+Presentation/
+└── Screen/
+    └── FooBar/
+        ├── FooBarScreen.kt
+        ├── FooBarViewModel.kt
+        └── FooBarState.kt
+```
+
+Follow the same structure for other screens, using the screen's name for its folder and the corresponding `Screen`, `ViewModel`, and `State` file suffixes.
+
 ## Suggested libraries
 
 Use these by default unless asked for something different or when alternatives fit better the project or its targets.

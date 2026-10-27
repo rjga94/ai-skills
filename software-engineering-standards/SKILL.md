@@ -102,7 +102,7 @@ Keep all UI code under a Presentation folder. Place the main UI entry-point file
 
 A Screen is a UI navigation destination, usually taking the whole screen.
 
-Each screen has it's own folder named appropriately for what the screen is (placed inside the Screen sub-folder), the screen specific folder usually contains three files:
+Each screen has its own folder named appropriately for what the screen is (placed inside the Screen sub-folder). Keep all screen-specific files inside that folder; do not place the screen, its ViewModel, or its State as siblings directly under `Screen`. The folder contains these three files:
 
 - Declarative UI file
 - ViewModel file
@@ -151,5 +151,6 @@ if the answer is NO to any of them, review and refactor accordingly.
 - Is the software kept scalable and modular, with clear bounderies throughout?
 - Are unit tests covering the changed software appropriately?
 - Is the changed software fully absent of duplicated code, logic or behaviour?
+- Are each screen's UI, ViewModel, and State files colocated in that screen's own folder?
 - While working on this change, have you considered all direct and indirect related code,
   consumers, dependencies, boundaries and documentation?

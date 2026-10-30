@@ -4,7 +4,7 @@ description: Apply software engineering and architecture guidance when designing
 argument-hint: "[project, architecture, or quality concern]"
 metadata:
   author: Ricardo Abreu
-  version: "1.5.4"
+  version: "1.5.5"
 ---
 
 # Software Engineering Standards
@@ -102,13 +102,13 @@ Keep all UI code under a Presentation folder. Place the main UI entry-point file
 
 A Screen is a UI navigation destination, usually taking the whole screen.
 
-Each screen has its own folder named appropriately for what the screen is (placed inside the Screen sub-folder). Keep all screen-specific files inside that folder; do not place the screen, its ViewModel, or its State as siblings directly under `Screen`. The folder contains these three files:
+Each screen has its own folder named appropriately for what the screen is (placed inside the Screen sub-folder). Keep the screen, its ViewModel, and its State together in that folder; do not place them as siblings directly under `Screen`. The folder contains these three files:
 
 - Declarative UI file
 - ViewModel file
 - State file
 
-Declarative UI file: Has the sole responsibility of containing UI building blocks of the screen, in declarative UI a screen is a single object, agnostic of domain state and and business logic. The object is named the same as it's screen folder with the "Screen" suffix.
+Declarative UI file: A screen is a navigation destination that provides destination-level context, defines the UI structure, and arranges components. Build the UI from components in the main `Component` folder; keep the screen focused on composition rather than implementing component UI pieces itself. The screen object is named the same as its screen folder with the "Screen" suffix and remains agnostic of domain state and business logic.
 
 ViewModel file: An object which has the responsibility maintaining the screen's state and logic, it's also the link between UI and Domain layer, can use repositories and use cases directly.
 The object is named the same as it's screen folder with the "ViewModel" suffix.
@@ -117,7 +117,7 @@ State file: A model object, the simplest of the three, declares the model of the
 
 ##### Component sub-folder
 
-A Component is a piece/portion of UI, meant to reduce duplication and isolation of UI code in screens and other components that need to use the same UI repeatedly.
+A Component is an isolated piece of UI, designed with a clear reusable interface to reduce duplication and make future reuse possible. Its interface is its minimal usage contract: the state or data it accepts, the user actions it reports, and any intentional customization it supports. Callers should use this contract without depending on the component's internal implementation. This does not require a formal interface or protocol, or extensive configuration; keep the contract as small as the component needs. No component is private to one screen. Put every component in the main `Component` folder, including components currently used by only one screen; do not keep component implementations in a screen folder. Build UI from components, while screens define the structure and placement that aggregate them.
 
 **MUST COMPLY**
 
@@ -130,9 +130,11 @@ Whenever a component changes, you MUST check all it's implementors to make sure 
 There are two types of components:
 
 - Stateless: A single file with a single object in it, takes in state/data from the outside and outputs user interactions. The object is named the same as it's component folder with the "Component" suffix.
-- Stateful: Technically exactly the same as a screen, only it still represents a piece of UI and not a navigation destination, so you can follow Screen guidance described in this skill.
+- Stateful: A component that owns the state needed for its piece of UI. Keep it in the main `Component` folder and give it a focused interface; unlike a screen, it is not a navigation destination. Do not apply screen-folder organization to stateful components.
 
-**Most cases use stateless components but choosing between that or a stateful component is a complex decision, so whenever this decision needs to be made, confirm with the user.**
+Use a stateless component by default when its screen ViewModel supplies the state/data and handles the feature behavior; the component renders that input and reports user actions. Choose a stateful component when it owns a cohesive, independently managed feature slice, including its state/data loading and feature-specific behavior.
+
+As a practical test, ask: if this component moved to another screen, would it still need to load the same feature data and perform the same business validation? If yes, that is evidence the responsibility belongs to an isolated component with its own focused ViewModel, rather than being tied to either screen. If no, keep it stateless and let the screen ViewModel own that behavior. A shared endpoint alone is not enough reason to add a ViewModel; the data and business responsibility should belong to the same feature. Keep transient interaction state close to the component when appropriate, but do not add a ViewModel solely to manage simple UI state. If the ownership boundary remains unclear, confirm it with the user.
 
 ##### Theme sub-folder
 
@@ -152,5 +154,7 @@ if the answer is NO to any of them, review and refactor accordingly.
 - Are unit tests covering the changed software appropriately?
 - Is the changed software fully absent of duplicated code, logic or behaviour?
 - Are each screen's UI, ViewModel, and State files colocated in that screen's own folder?
+- Is every UI piece implemented as a component in the main `Component` folder, including pieces currently used by only one screen?
+- Does each screen act only as a destination shell that provides context and aggregates components?
 - While working on this change, have you considered all direct and indirect related code,
   consumers, dependencies, boundaries and documentation?

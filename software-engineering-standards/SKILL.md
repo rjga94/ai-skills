@@ -4,7 +4,7 @@ description: Apply software engineering and architecture guidance when designing
 argument-hint: "[project, architecture, or quality concern]"
 metadata:
   author: Ricardo Abreu
-  version: "1.5.5"
+  version: "1.5.6"
 ---
 
 # Software Engineering Standards
@@ -125,7 +125,7 @@ Do not build look alike components.
 
 Always consider adapting a component first before creating a new one.
 
-Whenever a component changes, you MUST check all it's implementors to make sure none of them broke visually or logically.
+Whenever a component changes, you MUST check all its implementors for behavioral regressions.
 
 There are two types of components:
 
